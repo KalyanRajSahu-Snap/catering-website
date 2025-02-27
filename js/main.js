@@ -41,8 +41,24 @@ function handleContactForm() {
     }
 }
 
+function handleSubscribeForm() {
+    const form = document.querySelector('.subscribe-form');
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = form.querySelector('input[type="email"]').value;
+            
+            // Here you would typically send this to a server
+            console.log('Newsletter subscription:', email);
+            alert('Thank you for subscribing!');
+            form.reset();
+        });
+    }
+}
+
 // Initialize functions when the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     displayMenu();
     handleContactForm();
+    handleSubscribeForm();
 });
