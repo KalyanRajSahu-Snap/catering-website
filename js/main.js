@@ -1,64 +1,51 @@
-// Sample menu items
-const menuItems = [
-    { name: 'Butter Chicken', price: 12.99 },
-    { name: 'Vegetable Biryani', price: 10.99 },
-    { name: 'Paneer Tikka', price: 9.99 },
-    { name: 'Chicken Tandoori', price: 13.99 },
+// Replace the existing menuItems array with these three arrays
+const vegetarianMenu = [
+    { name: 'Paneer Tikka', price: 250 },
+    { name: 'Vegetable Biryani', price: 220 },
+    { name: 'Dal Makhani', price: 180 },
+    { name: 'Palak Paneer', price: 200 },
+    { name: 'Veg Kolhapuri', price: 190 },
+];
+
+const nonVegetarianMenu = [
+    { name: 'Butter Chicken', price: 300 },
+    { name: 'Chicken Biryani', price: 280 },
+    { name: 'Fish Curry', price: 320 },
+    { name: 'Mutton Rogan Josh', price: 350 },
+    { name: 'Tandoori Chicken', price: 280 },
+];
+
+const jainMenu = [
+    { name: 'Jain Vegetable Curry', price: 220 },
+    { name: 'Jain Pulao', price: 200 },
+    { name: 'Jain Dal Fry', price: 170 },
+    { name: 'Jain Aloo Gobi', price: 180 },
+    { name: 'Jain Bhindi Masala', price: 190 },
 ];
 
 // Function to display menu items
-function displayMenu() {
-    const menuContainer = document.getElementById('menu-items');
+function displayMenu(menuItems, containerId) {
+    const menuContainer = document.getElementById(containerId);
     if (menuContainer) {
         menuItems.forEach(item => {
             const itemElement = document.createElement('div');
             itemElement.classList.add('menu-item');
             itemElement.innerHTML = `
                 <h3>${item.name}</h3>
-                <p>$${item.price.toFixed(2)}</p>
+                <p>₹${item.price.toFixed(2)}</p>
             `;
             menuContainer.appendChild(itemElement);
         });
     }
 }
 
-// Function to handle contact form submission
-function handleContactForm() {
-    const form = document.getElementById('contact-form');
-    if (form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const formData = new FormData(form);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const message = formData.get('message');
-            
-            // Here you would typically send this data to a server
-            console.log('Form submitted:', { name, email, message });
-            alert('Thank you for your message. We will get back to you soon!');
-            form.reset();
-        });
-    }
-}
-
-function handleSubscribeForm() {
-    const form = document.querySelector('.subscribe-form');
-    if (form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = form.querySelector('input[type="email"]').value;
-            
-            // Here you would typically send this to a server
-            console.log('Newsletter subscription:', email);
-            alert('Thank you for subscribing!');
-            form.reset();
-        });
-    }
-}
-
 // Initialize functions when the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    displayMenu();
+    displayMenu(vegetarianMenu, 'vegetarian-menu');
+    displayMenu(nonVegetarianMenu, 'non-vegetarian-menu');
+    displayMenu(jainMenu, 'jain-menu');
     handleContactForm();
+    handleLoginForm();
+    handleSignupForm();
     handleSubscribeForm();
 });
