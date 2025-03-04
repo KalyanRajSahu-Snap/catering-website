@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu - Indian Catering Service</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -26,22 +27,120 @@
     </header>
 
     <main>
-        <section class="menu">
-            <h1>Our Menu</h1>
+        <section class="menu-options">
+            <h1>Our Menu Options</h1>
             
-            <div class="menu-section">
-                <h2>Vegetarian Menu</h2>
-                <div id="vegetarian-menu" class="menu-items"></div>
+            <div class="menu-choice-buttons">
+                <button id="view-menu-btn" class="choice-btn active">
+                    <i class="fas fa-book-open"></i>
+                    <span>View Our Menu</span>
+                </button>
+                <button id="create-menu-btn" class="choice-btn">
+                    <i class="fas fa-utensils"></i>
+                    <span>Create Your Own Menu</span>
+                </button>
             </div>
-            
-            <div class="menu-section">
-                <h2>Non-Vegetarian Menu</h2>
-                <div id="non-vegetarian-menu" class="menu-items"></div>
+
+            <!-- View Our Menu Section -->
+            <div id="view-menu-section" class="menu-section active">
+                <div class="menu-category">
+                    <h2>Vegetarian Menu</h2>
+                    <div id="vegetarian-menu" class="menu-items"></div>
+                </div>
+                
+                <div class="menu-category">
+                    <h2>Non-Vegetarian Menu</h2>
+                    <div id="non-vegetarian-menu" class="menu-items"></div>
+                </div>
+                
+                <div class="menu-category">
+                    <h2>Jain Menu</h2>
+                    <div id="jain-menu" class="menu-items"></div>
+                </div>
             </div>
-            
-            <div class="menu-section">
-                <h2>Jain Menu</h2>
-                <div id="jain-menu" class="menu-items"></div>
+
+            <!-- Create Your Own Menu Section -->
+            <div id="create-menu-section" class="menu-section">
+                <div class="menu-categories-nav">
+                    <button class="category-btn active">WELCOME DRINK</button>
+                    <button class="category-btn">SOUP(VEG)</button>
+                    <button class="category-btn">SOUP(NON-VEG)</button>
+                    <button class="category-btn">CHAT COUNTER</button>
+                    <button class="category-btn">COUNTER DRESSING(VEG)</button>
+                    <button class="category-btn">COUNTER DRESSING(NON-VEG)</button>
+                </div>
+
+                <div class="custom-menu-content">
+                    <h2>WELCOME DRINK</h2>
+                    <div class="menu-grid">
+                        <div class="menu-column">
+                            <label class="menu-item-checkbox">
+                                <input type="checkbox" name="drink" value="badam-shake">
+                                <span>Badam shake</span>
+                            </label>
+                            <label class="menu-item-checkbox">
+                                <input type="checkbox" name="drink" value="mango-shake">
+                                <span>Mango Shake</span>
+                            </label>
+                            <label class="menu-item-checkbox">
+                                <input type="checkbox" name="drink" value="badam-milk">
+                                <span>Badam Milk</span>
+                            </label>
+                            <label class="menu-item-checkbox">
+                                <input type="checkbox" name="drink" value="oreo-shake">
+                                <span>Oreo Shake</span>
+                            </label>
+                            <label class="menu-item-checkbox">
+                                <input type="checkbox" name="drink" value="fruit-shake">
+                                <span>Fruit Shake</span>
+                            </label>
+                        </div>
+                        <div class="menu-column">
+                            <label class="menu-item-checkbox">
+                                <input type="checkbox" name="drink" value="jaljeera">
+                                <span>Jaljeera</span>
+                            </label>
+                            <label class="menu-item-checkbox">
+                                <input type="checkbox" name="drink" value="soda-beverages">
+                                <span>Soda beverages</span>
+                            </label>
+                            <label class="menu-item-checkbox">
+                                <input type="checkbox" name="drink" value="mocktail">
+                                <span>Mocktail</span>
+                            </label>
+                            <label class="menu-item-checkbox">
+                                <input type="checkbox" name="drink" value="aam-panna">
+                                <span>Aam Panna</span>
+                            </label>
+                            <label class="menu-item-checkbox">
+                                <input type="checkbox" name="drink" value="ginger-peach">
+                                <span>Ginger Peach Soda</span>
+                            </label>
+                        </div>
+                        <div class="menu-column">
+                            <label class="menu-item-checkbox">
+                                <input type="checkbox" name="drink" value="orange-blossom">
+                                <span>Orange Blossom</span>
+                            </label>
+                            <label class="menu-item-checkbox">
+                                <input type="checkbox" name="drink" value="blue-heaven">
+                                <span>Blue Heaven</span>
+                            </label>
+                            <label class="menu-item-checkbox">
+                                <input type="checkbox" name="drink" value="falooda">
+                                <span>Falooda Sarbat</span>
+                            </label>
+                            <label class="menu-item-checkbox">
+                                <input type="checkbox" name="drink" value="virgin-paloma">
+                                <span>Virgin Paloma</span>
+                            </label>
+                            <label class="menu-item-checkbox">
+                                <input type="checkbox" name="drink" value="fresh-juice">
+                                <span>Fresh Juice Soda</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
