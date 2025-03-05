@@ -94,6 +94,36 @@ function handleContactForm() {
     }
 }
 
+function initializeTestimonialCarousel() {
+    const carousel = document.querySelector('.testimonial-carousel');
+    if (carousel) {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        carousel.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - carousel.offsetLeft;
+            scrollLeft = carousel.scrollLeft;
+        });
+
+        carousel.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        carousel.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        carousel.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - carousel.offsetLeft;
+            const walk = (x - startX) * 2;
+            carousel.scrollLeft = scrollLeft - walk;
+        });
+    }
+}
 // Initialize functions when the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     displayMenu(vegetarianMenu, 'vegetarian-menu');
@@ -102,4 +132,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeMenuToggle();
     initializeCategoryButtons();
     handleContactForm();
+    initializeTestimonialCarousel();
 });
