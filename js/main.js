@@ -124,6 +124,55 @@ function initializeTestimonialCarousel() {
         });
     }
 }
+
+function handleLoginForm() {
+    const form = document.getElementById('login-form');
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = form.email.value;
+            const password = form.password.value;
+            // Here you would typically send this data to a server for authentication
+            console.log('Login attempt:', { email, password });
+            alert('Login functionality not implemented in this demo.');
+        });
+    }
+}
+
+function handleSignupForm() {
+    const form = document.getElementById('signup-form');
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = form.name.value;
+            const email = form.email.value;
+            const password = form.password.value;
+            const confirmPassword = form['confirm-password'].value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+
+            // Here you would typically send this data to a server to create a new account
+            console.log('Signup attempt:', { name, email, password });
+            alert('Signup functionality not implemented in this demo.');
+        });
+    }
+}
+
+function handleForgotPasswordForm() {
+    const form = document.getElementById('forgot-password-form');
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = form.email.value;
+            // Here you would typically send this email to a server to initiate password reset
+            console.log('Password reset requested for:', email);
+            alert('Password reset functionality not implemented in this demo.');
+        });
+    }
+}
 // Initialize functions when the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     displayMenu(vegetarianMenu, 'vegetarian-menu');
@@ -133,4 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeCategoryButtons();
     handleContactForm();
     initializeTestimonialCarousel();
+    handleLoginForm();
+    handleSignupForm();
+    handleForgotPasswordForm();
 });
