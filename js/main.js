@@ -67,18 +67,47 @@ function initializeMenuToggle() {
 // Function to initialize category buttons
 function initializeCategoryButtons() {
     const categoryButtons = document.querySelectorAll('.category-btn');
-    const customMenuContent = document.querySelector('.custom-menu-content h2');
+    
+    // Create a mapping of button text to grid IDs
+    const categoryMapping = {
+        'WELCOME DRINK': 'welcome-drink',
+        'SOUP(VEG)': 'soup-veg',
+        'SOUP(NON-VEG)': 'soup-non-veg',
+        'CHAT COUNTER': 'chat-counter',
+        'COUNTER DRESSING(VEG)': 'counter-dressing-veg',
+        'COUNTER DRESSING(NON-VEG)': 'counter-dressing-non-veg'
+    };
+    
+    // Show the welcome drink grid by default
+    document.getElementById('welcome-drink').style.display = 'grid';
     
     categoryButtons.forEach(button => {
         button.addEventListener('click', () => {
             // Remove active class from all buttons
             categoryButtons.forEach(btn => btn.classList.remove('active'));
+            
             // Add active class to clicked button
             button.classList.add('active');
-            // Update content based on selected category
-            if (customMenuContent) {
-                customMenuContent.textContent = button.textContent;
+            
+            // Hide all menu grids
+            Object.values(categoryMapping).forEach(id => {
+                const grid = document.getElementById(id);
+                if (grid) {
+                    grid.style.display = 'none';
+                }
+            });
+            
+            // Show the corresponding menu grid
+            const categoryId = categoryMapping[button.textContent];
+            if (categoryId) {
+                const menuGrid = document.getElementById(categoryId);
+                if (menuGrid) {
+                    menuGrid.style.display = 'grid';
+                }
             }
+            
+            // Update content based on selected category
+            document.querySelector('.custom-menu-content h2').textContent = button.textContent;
         });
     });
 }

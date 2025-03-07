@@ -896,3 +896,29 @@ form button:hover {
 .auth-switch a:hover {
     text-decoration: underline;
 }
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.menu-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.menu-item-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.menu-item-checkbox input[type="checkbox"] {
+    margin: 0;
+}
+
+.menu-item-checkbox span {
+    font-size: 0.9rem;
+}
