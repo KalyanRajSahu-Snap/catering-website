@@ -202,6 +202,157 @@ function handleForgotPasswordForm() {
         });
     }
 }
+
+function initializeMenuSelection() {
+    const checkboxes = document.querySelectorAll('.menu-item-checkbox input[type="checkbox"]');
+    const selectedItemsList = document.getElementById('selected-items-list');
+    const clearSelectionBtn = document.getElementById('clear-selection');
+    const saveMenuBtn = document.getElementById('save-menu');
+    
+    // Object to store selected items by category
+    const selectedItems = {};
+    
+    // Function to update the selected items list
+    function updateSelectedItemsList() {
+        // Clear the current list
+        selectedItemsList.innerHTML = '';
+        
+        let hasItems = false;
+        
+        // Loop through each category in the selectedItems object
+        for (const category in selectedItems) {
+            if (selectedItems[category].length > 0) {
+                hasItems = true;
+                
+                // Create category group
+                const categoryGroup = document.createElement('div');
+                categoryGroup.className = 'category-group';
+                
+                // Add category title
+                const categoryTitle = document.createElement('div');
+                categoryTitle.className = 'category-title';
+                categoryTitle.textContent = category;
+                categoryGroup.appendChild(categoryTitle);
+                
+                // Add items for this category
+                selectedItems[category].forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'selected-item';
+                    itemElement.innerHTML = `
+                        <span>${item}</span>
+                        <button class="remove-item" data-category="${category}" data-item="${item}">×</button>
+                    `;
+                    categoryGroup.appendChild(itemElement);
+                });
+                
+                selectedItemsList.appendChild(categoryGroup);
+            }
+        }
+        
+        // If no items are selected, show the empty message
+        if (!hasItems) {
+            const emptyMessage = document.createElement('p');
+            emptyMessage.className = 'empty-selection';
+            emptyMessage.textContent = 'No items selected yet';
+            selectedItemsList.appendChild(emptyMessage);
+        }
+        
+        // Add event listeners to remove buttons
+        document.querySelectorAll('.remove-item').forEach(button => {
+            button.addEventListener('click', function() {
+                const category = this.getAttribute('data-category');
+                const item = this.getAttribute('data-item');
+                
+                // Remove the item from the selectedItems object
+                selectedItems[category] = selectedItems[category].filter(i => i !== item);
+                
+                // Find and uncheck the corresponding checkbox
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.parentElement.querySelector('span').textContent === item) {
+                        checkbox.checked = false;
+                    }
+                });
+                
+                // Update the list
+                updateSelectedItemsList();
+            });
+        });
+    }
+    
+    // Add event listeners to all checkboxes
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const itemName = this.parentElement.querySelector('span').textContent;
+            
+            // Determine the category based on the current active category
+            const category = document.querySelector('.custom-menu-content h2').textContent;
+            
+            // Initialize the category array if it doesn't exist
+            if (!selectedItems[category]) {
+                selectedItems[category] = [];
+            }
+            
+            if (this.checked) {
+                // Add the item to the selectedItems object
+                if (!selectedItems[category].includes(itemName)) {
+                    selectedItems[category].push(itemName);
+                }
+            } else {
+                // Remove the item from the selectedItems object
+                selectedItems[category] = selectedItems[category].filter(item => item !== itemName);
+            }
+            
+            // Update the selected items list
+            updateSelectedItemsList();
+        });
+    });
+    
+    // Clear selection button
+    if (clearSelectionBtn) {
+        clearSelectionBtn.addEventListener('click', function() {
+            // Clear the selectedItems object
+            for (const category in selectedItems) {
+                selectedItems[category] = [];
+            }
+            
+            // Uncheck all checkboxes
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            // Update the list
+            updateSelectedItemsList();
+        });
+    }
+    
+    // Save menu button
+    if (saveMenuBtn) {
+        saveMenuBtn.addEventListener('click', function() {
+            // Check if any items are selected
+            let hasItems = false;
+            for (const category in selectedItems) {
+                if (selectedItems[category].length > 0) {
+                    hasItems = true;
+                    break;
+                }
+            }
+            
+            if (hasItems) {
+                // In a real application, you would save this to a database
+                // For now, we'll just show an alert
+                alert('Your custom menu has been saved!');
+                
+                // You could also redirect to a confirmation page
+                // window.location.href = 'confirmation.html';
+            } else {
+                alert('Please select at least one item for your custom menu.');
+            }
+        });
+    }
+    
+    // Initialize the list
+    updateSelectedItemsList();
+}
 // Initialize functions when the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     displayMenu(vegetarianMenu, 'vegetarian-menu');
@@ -214,4 +365,5 @@ document.addEventListener('DOMContentLoaded', () => {
     handleLoginForm();
     handleSignupForm();
     handleForgotPasswordForm();
+    initializeMenuSelection();
 });
